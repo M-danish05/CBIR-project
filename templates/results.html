@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBIR System - Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🔍 CBIR System</div>
+        <div class="nav-info">
+            <span>Total Images: 200</span>
+            <span>Classes: 10</span>
+            <span>mAP: 73.7%</span>
+        </div>
+        <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </nav>
+
+    <div class="main-container">
+        <div class="results-header">
+            <h2>Search Results</h2>
+            <a href="/" class="back-btn">🔙 New Search</a>
+        </div>
+
+        <div class="query-section">
+    <h3>Image Comparison</h3>
+    <div class="comparison-container">
+        <div class="comparison-box">
+            <h4>Query Image</h4>
+            <img src="{{ url_for('static', filename='uploads/' + query_image) }}" 
+                 alt="Query Image">
+        </div>
+        <div class="comparison-arrow">➡️</div>
+        <div class="comparison-box">
+            <h4>Best Match</h4>
+            <img src="data:image/jpeg;base64,{{ results[0].image }}" 
+                 alt="{{ results[0].label }}">
+            <p class="result-label">{{ results[0].label }}</p>
+            <p class="result-score">Score: {{ results[0].score }}</p>
+        </div>
+    </div>
+</div>
+
+        <div class="results-section">
+            <h3>Top-{{ results|length }} Similar Images</h3>
+            <div class="results-grid">
+                {% for result in results %}
+                <div class="result-card">
+                    <img src="data:image/jpeg;base64,{{ result.image }}" 
+                         alt="{{ result.label }}">
+                    <div class="result-info">
+                        <p class="result-label">{{ result.label }}</p>
+                        <p class="result-score">Score: {{ result.score }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="metrics-section">
+            <h3>Evaluation Metrics</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>85.7%</h4>
+                    <p>Precision@5</p>
+                </div>
+                <div class="metric-card">
+                    <h4>22.5%</h4>
+                    <p>Recall@5</p>
+                </div>
+                <div class="metric-card">
+                    <h4>73.7%</h4>
+                    <p>mAP Score</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h3>Similarity Scores Chart</h3>
+            <canvas id="similarityChart"></canvas>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        const labels = [{% for result in results %}"{{ result.label }}"{% if not loop.last %},{% endif %}{% endfor %}];
+        const scores = [{% for result in results %}{{ result.score }}{% if not loop.last %},{% endif %}{% endfor %}];
+        
+        const ctx = document.getElementById('similarityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Similarity Score',
+                    data: scores,
+                    backgroundColor: 'rgba(102, 126, 234, 0.7)',
+                    borderColor: 'rgba(102, 126, 234, 1)',
+                    borderWidth: 2,
+                    borderRadius: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 0.5,
+                        max: 1.0
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBIR System - Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🔍 CBIR System</div>
+        <div class="nav-info">
+            <span>Total Images: 200</span>
+            <span>Classes: 10</span>
+            <span>mAP: 73.7%</span>
+        </div>
+        <a href="/history" class="history-btn">🕐 History</a>
+        <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </nav>
+
+    <div class="main-container">
+        <div class="upload-section">
+            <h2>Upload Query Image</h2>
+            <p>Upload an animal image to find similar images</p>
+            <form method="POST" action="/search" enctype="multipart/form-data">
+                <div class="upload-box" id="upload-box">
+                    <div class="upload-icon">📁</div>
+                    <p>Drag & Drop or Click to Upload</p>
+                    <p class="upload-hint">JPG, JPEG, PNG supported</p>
+                    <input type="file" name="image" id="image-input" accept=".jpg,.jpeg,.png" required>
+                </div>
+                <div id="preview-container" style="display:none;">
+                    <img id="preview-image" src="" alt="Preview">
+                </div>
+                <div class="slider-container">
+                    <label>Number of similar images: <span id="k-value">5</span></label>
+                    <input type="range" name="top_k" min="3" max="10" value="5" 
+                           oninput="document.getElementById('k-value').textContent=this.value">
+                </div>
+                <button type="submit" class="search-btn">🔍 Search Similar Images</button>
+            </form>
+        </div>
+
+        <div class="stats-section">
+            <h3>System Performance</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>85.7%</h4>
+                    <p>Precision@5</p>
+                </div>
+                <div class="stat-card">
+                    <h4>22.5%</h4>
+                    <p>Recall@5</p>
+                </div>
+                <div class="stat-card">
+                    <h4>73.7%</h4>
+                    <p>mAP Score</p>
+                </div>
+                <div class="stat-card">
+                    <h4>200</h4>
+                    <p>Database Images</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

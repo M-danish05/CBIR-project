@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBIR System - Search History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🔍 CBIR System</div>
+        <div class="nav-info">
+            <span>Total Images: 200</span>
+            <span>Classes: 10</span>
+            <span>mAP: 73.7%</span>
+        </div>
+        <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </nav>
+
+    <div class="main-container">
+        <div class="results-header">
+            <h2>🕐 Search History</h2>
+            <a href="/" class="back-btn">🔙 New Search</a>
+            <a href="/clear_history" class="clear-btn">🗑️ Clear All</a>
+        </div>
+
+        {% if history %}
+        <div class="history-section">
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Query Image</th>
+                        <th>Result Label</th>
+                        <th>Score</th>
+                        <th>Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in history %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.query_image }}</td>
+                        <td class="result-label">{{ item.result_label }}</td>
+                        <td>{{ item.score }}</td>
+                        <td>{{ item.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>
+    <a href="/delete_history/{{ item.id }}" class="delete-btn">🗑️ Delete</a>
+</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="no-history">
+            <h3>No search history yet!</h3>
+            <p>Start searching to see your history here.</p>
+            <a href="/" class="search-btn">Start Searching</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
