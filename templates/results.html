@@ -51,9 +51,16 @@
                     <img src="data:image/jpeg;base64,{{ result.image }}" 
                          alt="{{ result.label }}">
                     <div class="result-info">
-                        <p class="result-label">{{ result.label }}</p>
-                        <p class="result-score">Score: {{ result.score }}</p>
-                    </div>
+    <p class="result-label">{{ result.label }}</p>
+    <p class="result-score">Score: {{ result.score }}</p>
+    <p class="result-region">🌍 Region: {{ result.region }}</p>
+    <p class="result-countries">📍 Found in: {{ result.countries }}</p>
+    <p class="result-population">👥 Population: {{ result.population }}</p>
+    <p class="result-origin">🗺️ Origin: {{ result.origin }}</p>
+    <p class="result-buy">🛒 Buy in Pakistan: {{ result.buy_in_pakistan }}</p>
+    <p class="result-price">💰 Price: {{ result.price_pkr }}</p>
+    <p class="result-description">{{ result.description }}</p>
+</div>
                 </div>
                 {% endfor %}
             </div>

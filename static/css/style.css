@@ -638,3 +638,59 @@ body.dark-mode .no-history {
         gap: 10px;
     }
 }
+/* Animal Info */
+.result-region {
+    color: #667eea;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.result-countries {
+    color: #555;
+    font-size: 11px;
+}
+
+.result-population {
+    color: #555;
+    font-size: 11px;
+}
+
+.result-description {
+    color: #888;
+    font-size: 11px;
+    font-style: italic;
+    margin-top: 3px;
+}
+
+body.dark-mode .result-countries,
+body.dark-mode .result-population {
+    color: #aaa;
+}
+
+body.dark-mode .result-description {
+    color: #888;
+}
+.result-origin {
+    color: #667eea;
+    font-size: 11px;
+}
+
+.result-buy {
+    color: #2e7d32;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.result-price {
+    color: #e53e3e;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+body.dark-mode .result-buy {
+    color: #81c784;
+}
+
+body.dark-mode .result-price {
+    color: #ef9a9a;
+}
