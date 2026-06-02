@@ -58,3 +58,40 @@ window.onload = function() {
         document.querySelector('.dark-mode-btn').textContent = '☀️ Light Mode';
     }
 }
+// AI Chatbot
+function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const chatBox = document.getElementById('chat-box');
+    const message = input.value.trim();
+    
+    if (!message) return;
+
+    // Show user message
+    chatBox.innerHTML += `<div class="user-msg">👤 ${message}</div>`;
+    input.value = '';
+
+    // Send to AI
+    fetch('/chat', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `message=${encodeURIComponent(message)}`
+    })
+    .then(res => res.json())
+    .then(data => {
+        chatBox.innerHTML += `<div class="ai-msg">🤖 ${data.response}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    })
+    .catch(err => {
+        chatBox.innerHTML += `<div class="ai-msg">🤖 Error: ${err}</div>`;
+    });
+}
+
+// Send on Enter key
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('chat-input');
+    if (input) {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+    }
+});

@@ -63,6 +63,17 @@
                 </div>
             </div>
         </div>
+
+        <div class="chat-section">
+            <h3>🤖 AI Animal Assistant</h3>
+            <p>Ask anything about animals!</p>
+            <div class="chat-box" id="chat-box"></div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Ask about animals...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

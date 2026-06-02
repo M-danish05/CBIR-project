@@ -10,6 +10,9 @@ import io
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from google import genai
+GEMINI_API_KEY = "AIzaSyAqHWdpyXgZ_iB5KzV5GIAMKUomjxJqtRw"
+gemini_client = genai.Client(api_key=GEMINI_API_KEY)
 
 app = Flask(__name__)
 app.secret_key = 'cbir_secret_key'
@@ -224,6 +227,20 @@ def register():
             success = 'Account created successfully! Please login.'
     return render_template('register.html', error=error, success=success)
 
+@app.route('/chat', methods=['POST'])
+def chat():
+    if 'logged_in' not in session:
+        return {'response': 'Please login first!'}, 401
+    user_message = request.form['message']
+    try:
+        response = gemini_client.models.generate_content(
+          model='gemini-2.5-flash',
+            contents=f"You are an animal expert. Answer this question about animals: {user_message}"
+        )
+        return {'response': response.text}
+    except Exception as e:
+        return {'response': f'Error: {str(e)}'}
+
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
@@ -288,10 +305,27 @@ def search():
         db.session.add(history)
     db.session.commit()
 
+    # AI Image Caption
+    try:
+        from PIL import Image as PILImage
+        with open(filepath, 'rb') as f:
+            img_bytes = f.read()
+        img_b64 = base64.b64encode(img_bytes).decode()
+        caption_response = gemini_client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=[
+                {'inline_data': {'mime_type': 'image/jpeg', 'data': img_b64}},
+                {'text': 'Describe this animal image in one sentence.'}
+            ]
+        )
+        ai_caption = caption_response.text
+    except:
+        ai_caption = "Caption not available"
+
     return render_template('results.html',
                          results=results,
-                         query_image=filename)
-
+                         query_image=filename,
+                         ai_caption=ai_caption)
 with app.app_context():
     db.create_all()
 

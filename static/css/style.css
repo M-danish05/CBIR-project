@@ -694,3 +694,83 @@ body.dark-mode .result-buy {
 body.dark-mode .result-price {
     color: #ef9a9a;
 }
+/* AI Chatbot */
+.chat-section {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.chat-section h3 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.chat-box {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #f8f8ff;
+}
+
+.user-msg {
+    background: #667eea;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 15px;
+    margin: 8px 0;
+    max-width: 80%;
+    margin-left: auto;
+    text-align: right;
+}
+
+.ai-msg {
+    background: #f0f0ff;
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 15px;
+    margin: 8px 0;
+    max-width: 80%;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.chat-input button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+body.dark-mode .chat-section {
+    background: #16213e;
+}
+
+body.dark-mode .chat-box {
+    background: #0f3460;
+    border-color: #1a1a2e;
+}
+
+body.dark-mode .ai-msg {
+    background: #1a1a2e;
+    color: #e0e0e0;
+}
