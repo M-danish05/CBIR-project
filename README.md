@@ -11,11 +11,16 @@ A deep learning-based Content Based Image Retrieval (CBIR) system built with Fla
 ## Features
 - User Login & Register
 - Image Upload & Retrieval
-- Search History
+- Search History (Delete & Clear All)
 - Dark Mode
 - Similarity Chart
 - Image Comparison
 - Mobile Friendly
+- Animal Origin & Region Info
+- Animal Availability in Pakistan
+- Price Information (PKR)
+- Animal Population Info
+- Animal Description
 
 ## Dataset
 - Animals-10 Dataset
