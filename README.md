@@ -21,6 +21,8 @@ A deep learning-based Content Based Image Retrieval (CBIR) system built with Fla
 - Price Information (PKR)
 - Animal Population Info
 - Animal Description
+- AI Animal Chatbot (Gemini 2.5)
+- AI Image Caption Generator
 
 ## Dataset
 - Animals-10 Dataset
