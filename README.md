@@ -44,4 +44,12 @@ A deep learning-based Content Based Image Retrieval (CBIR) system built with Fla
 4. Open: `http://127.0.0.1:5000`
 
 ## Developer
-Muhammad Danish
+**Muhammad Danish**
+GitHub: [@M-danish05](https://github.com/M-danish05)
+
+## Developed By
+**Dynaix Studio**  
+Website: https://www.daynixstudio.com/
+
+---
+© 2026 Dynaix Studio. All rights reserved.
